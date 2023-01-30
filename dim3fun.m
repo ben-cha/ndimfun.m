@@ -11,19 +11,25 @@ sz = size(data);
 cellflag = iscell(data);
 matflag = (~ismatrix(data) && ndims(data)==3);
 
-if cellflag % use cellfun if input is cell
+if cellflag
     output = cellfun(FUN, data, varargin{:}, 'uniformoutput', false);
 elseif matflag
     varargs = cell(1:nargin-2);
-    % tried to pre-allocate output size, but not worth trying to implement for operations that use multiple inputs and have a different output size
-    try % try using pagefun
+    try
         output = pagefun(FUN, data, varargin);
-    catch % use for-loop if not
+    catch
         for i = 1:sz(3)
             for j = 1:nargin-2
                 varargs{j} = varargin{j}(:,:,i);
             end
-            output(:,:,i) = FUN(data(:,:,i), varargs{:});
+            if i == 1 % pre-allocate
+                temp = FUN(data(:,:,i), varargs{:});
+                szOut = size(temp);
+                output = zeros(szOut);
+                output(:,:,i)=temp;
+            else
+                output(:,:,i) = FUN(data(:,:,i), varargs{:});
+            end
         end
     end
 end
