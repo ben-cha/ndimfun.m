@@ -32,3 +32,5 @@ profile off
 disp(['cellfun time: ' num2str(sum([c.FunctionTable.TotalTime])) ' s'])
 disp(['gpuArray time: ' num2str(sum([C.FunctionTable.TotalTime])) ' s'])
 ```
+
+[![View dim3fun.m on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/124215-dim3fun-m)
