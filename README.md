@@ -8,9 +8,9 @@ Good for testing optimization of your code based on which version of the functio
 Only works on intensity images for now. 
 
 ## Example: Image processing
-Say you want to use @rot90 on a set of 20 intensity images of size 10 x 10. 
-You then may have a matrix of said imageset with size [10 10 20] or a cell of length 20 arrays of size [10 10]
-You might be wondering if it's computationally worth it to convert your imageset to a gpuArray and use pagefun or to just use cellfun
+Say you want to use @rot90 on a set of 20 intensity images of size 10 x 10.  
+You then may have a matrix of said imageset with size [10 10 20] or a cell of length 20 with arrays of size [10 10]  
+You might be wondering if it's computationally worth it to convert your imageset to a gpuArray and use pagefun or to just use cellfun  
 Use dim3fun to compare the processing times
 
 ```
