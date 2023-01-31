@@ -5,13 +5,13 @@ Sometimes cellfun, pagefun, and for-loops can be used interchangeably granted th
 I got annoyed having to write new loops every time I decided one format was better than the other, so I just smashed it all together into one function.
 Good for testing optimization of your code based on which version of the function you use. 
 
-Only works on intensity images for now. 
-
 ## Example: Image processing
 Say you want to use @rot90 on a set of 20 intensity images of size 10 x 10.  
 You then may have a matrix of said imageset with size [10 10 20] or a cell of length 20 with arrays of size [10 10]  
 You might be wondering if it's computationally worth it to convert your imageset to a gpuArray and use pagefun or to just use cellfun  
 Use dim3fun to compare the processing times
+
+## Sample code:
 
 ```
 dirs = fullfile({dir([fileparts(which('kobi.png')), '\AT3*.tif']).folder}, {dir([fileparts(which('kobi.png')), '\AT3*.tif']).name});
