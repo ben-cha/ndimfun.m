@@ -1,4 +1,4 @@
-# dim3fun
+# ndimfun
 Like cellfun and pagefun, but indifferent to which. If input is a cell, use cellfun; if input is multi-page array, try pagefun / catch for-loop. 
 
 Sometimes cellfun, pagefun, and for-loops can be used interchangeably granted the data is formatted correctly for the use-case. 
