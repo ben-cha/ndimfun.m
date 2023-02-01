@@ -9,7 +9,7 @@ Good for testing optimization of your code based on which version of the functio
 Say you want to use @rot90 on a set of 20 intensity images of size 10 x 10.  
 You then may have a matrix of said imageset with size [10 10 20] or a cell of length 20 with arrays of size [10 10]  
 You might be wondering if it's computationally worth it to convert your imageset to a gpuArray and use pagefun or to just use cellfun  
-Use dim3fun to compare the processing times
+Use ndimfun to compare the processing times
 
 ## Sample code:
 
@@ -18,19 +18,19 @@ dirs = fullfile({dir([fileparts(which('kobi.png')), '\AT3*.tif']).folder}, {dir(
 A = cellfun(@(x) im2gray(imread(x)), dirs, 'uniformoutput', false);
 profile clear
 profile on
-a = dim3fun(@rot90, A);
-c = profile('info');
+a = ndimfun(@rot90, A);
+aa = profile('info');
 profile off
 profile clear
 profile on
 sz = size(A{1});
 B = gpuArray(reshape(cell2mat(A),sz(1), sz(2), []));
-b = dim3fun(@rot90, B);
-C = profile('info');
+b = ndimfun(@rot90, B);
+bb = profile('info');
 profile off
 
-disp(['cellfun time: ' num2str(sum([c.FunctionTable.TotalTime])) ' s'])
-disp(['gpuArray time: ' num2str(sum([C.FunctionTable.TotalTime])) ' s'])
+disp(['cellfun time: ' num2str(sum([aa.FunctionTable.TotalTime])) ' s'])
+disp(['gpuArray time: ' num2str(sum([bb.FunctionTable.TotalTime])) ' s'])
 ```
 
-[![View dim3fun.m on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/124215-dim3fun-m)
+[![View ndimfun.m on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/124215-ndimfun-m)
